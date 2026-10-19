@@ -49,10 +49,12 @@ nav a {
   color: white;
   text-decoration: none;
   margin-left: 20px;
+  transition: opacity 0.2s ease;
 }
 
 nav a:hover {
   text-decoration: underline;
+  opacity: 0.75;
 }
 
 /* About section */
@@ -74,6 +76,12 @@ nav a:hover {
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 20px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
 
 .project-box img {
@@ -96,6 +104,32 @@ form {
   background-color: var(--box-color);
   border: 1px solid var(--border-color);
   border-radius: 8px;
+}
+
+/* Form messages */
+.error {
+  color: #b00020;
+  font-size: 0.9rem;
+  margin: 5px 0 0;
+}
+
+.error:empty {
+  display: none;
+}
+
+#form-success {
+  color: #1b6e2d;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+/* Lighter colors for dark mode so they stay readable */
+body.dark-mode .error {
+  color: #ff8a8a;
+}
+
+body.dark-mode #form-success {
+  color: #7ddc92;
 }
 
 label {
@@ -122,10 +156,12 @@ button {
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 button:hover {
   opacity: 0.85;
+  transform: translateY(-2px);
 }
 
 /* Footer */
@@ -183,4 +219,34 @@ body.dark-mode input,
 body.dark-mode textarea {
   background-color: var(--bg-color);
   color: var(--text-color);
+}
+
+/* Project search box */
+#project-search {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+#no-results {
+  font-style: italic;
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.project-box,
+.error,
+#form-success,
+#no-results {
+  animation: fade-in 0.4s ease;
 }

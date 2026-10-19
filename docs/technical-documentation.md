@@ -1,11 +1,11 @@
 # Technical Documentation
 
 ## 1. Overview
-This is a responsive personal portfolio website built with HTML, CSS and JavaScript. It has three main sections (About Me, Projects, Contact) and two interactive features: a time-based greeting and a dark/light mode toggle. It uses no frameworks or backend.
+This is Assignment 2 of my portfolio. It builds on the Assignment 1 site (HTML, CSS, JavaScript, no frameworks or backend) and adds interactivity: a live project search, a saved theme, a validated contact form, user feedback messages and animations.
 
 ## 2. File Structure
 ```
-id-name-assignment1/
+202351790-LayanAlomari-assignment2/
 ├── README.md
 ├── index.html
 ├── css/
@@ -14,6 +14,8 @@ id-name-assignment1/
 │   └── script.js
 ├── assets/
 │   └── images/
+|       ├── flying-stars.png
+│       └── daleel-kfupm.png
 ├── docs/
 │   ├── ai-usage-report.md
 │   └── technical-documentation.md
@@ -23,62 +25,63 @@ id-name-assignment1/
 | File | Purpose |
 |---|---|
 | `index.html` | Page structure and content |
-| `css/styles.css` | Colors, layout, responsive design and dark mode styles |
-| `js/script.js` | Greeting message and theme toggle |
+| `css/styles.css` | Layout, colors, responsive design, dark mode and animations |
+| `js/script.js` | Greeting, theme toggle, project search and form validation |
 | `docs/` | Project documentation |
 
-## 3. HTML Structure
-The page uses semantic tags to describe its structure:
+## 3. Changes from Assignment 1
+- Added the `charset` and `viewport` meta tags so text and the mobile layout display correctly.
+- Added a live search for the projects.
+- The theme choice is now saved with `localStorage`.
+- The contact form now validates input and shows messages.
+- Added hover effects and fade-in animations.
+- Replaced the placeholder images with screenshots of my projects (stored in `assets/images/`).
 
-- `<header>`: site title, navigation links and the theme toggle button
-- `<nav>`: links to the three sections using `#about`, `#projects` and `#contact`
-- `<main>`: contains the three `<section>` elements
-- `<footer>`: copyright line
+## 4. Features
 
-**Sections**
-- **About Me** (`#about`): greeting, tagline and a short introduction.
-- **Projects** (`#projects`): two project boxes (`<article class="project-box">`), each with a title, description and placeholder image.
-- **Contact** (`#contact`): a form with Name, Email and Message fields.
+### 4.1 Live project search (dynamic content)
+A search box above the projects filters them as the user types.
 
-The `<head>` contains the page title and the link to the stylesheet.
+- A listener on the `input` event runs on every keystroke.
+- The typed text is lowercased and trimmed, so the search ignores capital letters.
+- For each `.project-box`, the script checks whether the box's text (title and description) contains the search text, using `includes()`.
+- Matching boxes are shown and the others are hidden with the `hidden` property.
+- A counter tracks how many projects match. If it is 0, the message "No projects found. Try a different word." is shown (empty state).
+- Clearing the box shows all projects again.
 
-## 4. CSS Design
+### 4.2 Saved theme (data handling with localStorage)
+- When the user clicks the theme button, the choice is saved with `localStorage.setItem("theme", "dark")` or `"light"`.
+- When the page loads, the script reads it with `localStorage.getItem("theme")`. If it is `"dark"`, the `dark-mode` class is added to `<body>` and the button text is set to "Light Mode".
+- Dark mode works by replacing the CSS color variables under `body.dark-mode`.
 
-### Color variables
-Colors are defined once in `:root` as CSS variables (for example `--accent-color`) and reused with `var()`. This makes the theme easy to change and allows dark mode to work by replacing the variables.
+### 4.3 Contact form validation (data handling and feedback)
+The form uses `novalidate` so the page shows its own messages instead of the browser's pop-ups. On submit, `event.preventDefault()` stops the page from reloading and the script checks each field:
 
-### Layout
-- **Flexbox** is used for the header (title on the left, navigation on the right) and for the contact form (fields stacked vertically).
-- **CSS Grid** is used for the projects. On desktop and tablet they sit in two equal columns (`grid-template-columns: repeat(2, 1fr)`). On mobile (600px and below) a media query changes this to one column (`grid-template-columns: 1fr`).
-- Sections use `max-width: 1000px` and `margin: 0 auto` to stay centered on wide screens.
-- The contact form uses `max-width: 500px` and `margin: 0 auto` so it stays centered at every screen width.
+| Field | Rule | Error message |
+|---|---|---|
+| Name | Not empty (after `trim()`) | "Please enter your name." |
+| Email | Matches the pattern `name@example.com` (regular expression) | "Please enter a valid email, like name@example.com." |
+| Message | At least 10 characters | "Please write a message of at least 10 characters." |
 
-### Responsive design
-Two media queries adapt the layout:
+A variable `isValid` becomes `false` if any check fails, and all errors are shown together. If everything is valid, a confirmation message with the user's name is shown ("Thanks, NAME! Your message was submitted.") and the form is cleared. The name is inserted with `textContent` so it is treated as plain text.
 
-| Breakpoint | Changes |
-|---|---|
-| `max-width: 768px` (tablet) | Smaller section padding |
-| `max-width: 600px` (mobile) | Header stacks vertically, projects switch to one column |
+### 4.4 Animations and transitions
+- **Hover effects:** project boxes lift up with a shadow, nav links and buttons change smoothly (CSS `transition`).
+- **Fade-in:** project boxes, error messages, the success message and the "No projects found" message use a `fade-in` animation (`@keyframes`, 0.4 seconds). Error paragraphs use `:empty { display: none; }`, so they are hidden until text is added and the animation plays when it appears.
 
-### Dark mode
-Dark mode is done with a `dark-mode` class on `<body>`. The rule `body.dark-mode` replaces the color variables with darker values, so the whole page changes at once. A few extra rules adjust heading colors and form fields for readability.
-
-## 5. JavaScript Features
-
-### Time-based greeting
-`getHours()` returns the current hour (0 to 23). An `if / else if / else` chooses "Good morning!" (before 12), "Good afternoon!" (before 18) or "Good evening!". The text is placed in `<p id="greeting">` using `textContent`.
-
-### Dark/light mode toggle
-An event listener on the button (`#theme-toggle`) runs when it is clicked. It calls `classList.toggle("dark-mode")` on `<body>`, which adds the class if it is missing and removes it if present. The button text then changes between "Dark Mode" and "Light Mode".
+## 5. Responsive Design
+The layout is unchanged from Assignment 1: Flexbox for the header and form, CSS Grid for the projects (two columns, one column at 600px and below), and media queries for tablet (768px) and mobile (600px). The new search box and messages adapt to the same layout.
 
 ## 6. Testing
-- Checked the layout at laptop, tablet and phone sizes using Chrome DevTools device mode.
-- Checked that navigation links scroll to the correct sections.
-- Checked that the greeting shows and the theme toggle switches correctly.
-- Checked the browser console for errors.
+- Searched for words in each project, for a word that matches nothing, and cleared the box.
+- Switched the theme, refreshed the page and checked that the choice was kept.
+- Submitted the form empty, with an invalid email, with a short message and with valid data.
+- Checked hover effects, fade-in animations and dark mode.
+- Checked the layout at laptop, tablet and phone sizes in Chrome DevTools.
+- Checked the browser Console for errors.
 
 ## 7. Known Limitations
-- The contact form has no backend, so messages are not sent or stored.
-- The theme choice is not saved, so the page returns to light mode when refreshed.
-- Project images are placeholders from `placehold.co`.
+- The contact form has no backend, so messages are not actually sent or stored.
+- The search only checks the title and description text of each project.
+- The email check is a basic pattern and does not prove the address exists.
+- `localStorage` may not save the theme in private browsing mode.
