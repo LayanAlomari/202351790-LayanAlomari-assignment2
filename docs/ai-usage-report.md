@@ -1,52 +1,51 @@
-# AI Usage Report
+# AI Usage Report - Assignment 2
 
 ## 1. Tools Used & Use Cases
 
 ### Claude
-I used Claude as my main assistant throughout the assignment, mostly as a tutor and code helper. I used it to:
-- Learn how to create a GitHub repository and what a `.gitignore` file does
-- Break the assignment into smaller tasks
-- Get a starting structure for `index.html`, `styles.css` and `script.js`
-- Understand HTML tags and attributes I had not used before, such as `<meta>`, `<nav>`and `<textarea>`
-- Understand how the CSS Grid and media queries work together for responsive design
-- Improve the layout, for example centering the contact form
-- Add the greeting message and the dark/light mode feature
-- Debug the greeting message when it did not appear on the page
-- Get feedback on my finished HTML and on my tagline
+I used Claude as my only AI tool for this assignment, as a tutor and code helper. I used it to:
+- Plan the assignment and divide it into tasks
+- Understand Git ideas I had not used before: why the assignment uses a new repository, what a branch is, what `git push -u origin` does, and what `.DS_Store` is
+- Fix the "Could not resolve host" error when cloning the repository
+- Get starting code for the new features:
+  - a live project search with a "No projects found" message
+  - saving the dark/light theme with `localStorage`
+  - contact form validation with error and confirmation messages
+  - hover effects and fade-in animations
+- Understand how each piece of code works, including events, `querySelectorAll`, `forEach`, `preventDefault`, `trim` and CSS `transition` and `@keyframes`
+- Organize my CSS, for example merging the new button hover effect into my existing rules
+- Write the technical documentation and README structure
 
-### ChatGPT
-I used ChatGPT for writing help with the text content of my portfolio:
-- It helped me write the short summaries of my two projects.
-- It helped me reword the introduction in my About Me section so it reads more clearly and professionally.
+I did not use any other AI tool for this assignment.
 
 ## 2. Benefits & Challenges
 
 ### Benefits
-- I could ask questions whenever I did not understand something, and get an explanation at my level.
-- It saved time on repetitive setup, such as the project structure and the CSS media queries.
-- It showed me good practices I would not have thought of on my own, like CSS variables.
-- Having the assignment split into tasks helped me stay organized.
+- I could ask follow-up questions until I understood a concept, such as what a branch is and why it is useful.
+- It gave me working starting code for each feature, so I could spend my time understanding and testing it.
+- It helped me find the cause of the clone error quickly. It was my network connection and not my repository.
+- Splitting the assignment into phases kept me organized.
 
 ### Challenges
-- I could not simply accept the answers. When the greeting did not appear, I had to check my file names, my HTML and the browser console to find the cause.
+- Some suggestions did not suit me. For example, the image styling Claude suggested did not look good to me, so I kept my original version.
+- One explanation was wrong at first. Claude misread the purple cloud icon in the VS Code Git graph and then had to correct itself. This showed me that I should check answers instead of trusting them completely.
+- The code needed testing. I had to try each feature and check the browser Console to make sure it worked.
 
 ## 3. Learning Outcomes
-- **HTML:** how a page is structured, why semantic tags matter, and what `<meta>` tags such as `charset` and `viewport` are for.
-- **CSS:** how Flexbox and Grid differ, how media queries change the layout for tablets and phones, and how CSS variables make theming easier.
-- **JavaScript:** how to find an element with `getElementById`, how event listeners work, and how `classList.toggle` switches dark mode.
-- **Debugging:** how to use the browser's DevTools and Console to find why something isn't working.
-- **Workflow:** how to plan a project in phases and test after each step.
+- **Git:** how branches work, why to use `feature/interactivity`, how to publish a branch, and how to read the commit graph.
+- **JavaScript:** how to respond to user actions with event listeners, how to loop over elements to filter them, how to read and write `localStorage`, and how to validate input and show messages.
+- **Forms:** why `event.preventDefault()` is needed, how `trim()` and a regular expression check input, and why a good error message says what is wrong and how to fix it.
+- **CSS:** the difference between `transition` and `@keyframes`, how `:empty` hides an element until it has content, and why it is better to keep each selector in one place.
+- **Workflow:** building a feature, testing it, and committing it before starting the next one.
 
 ## 4. Responsible Use & Modifications
-I did not copy the AI output without checking it. I reviewed each suggestion and made my own changes:
+I did not copy the AI output without checking it. I reviewed each suggestion, made my own decisions, and tested the result:
 
-- ChatGPT helped me write the project summaries and reword my introduction. I gave it information about my own projects and my background, and I reviewed the results to make sure they accurately described my work and sounded like me before adding them to the page.
-- I wrote the tagline myself, and got feedback from Claude on how to improve it.
-- I chose my own color scheme (`#0a5987`) instead of the suggested blue.
-- Claude recommended adding `<meta charset="UTF-8">` and the viewport meta tag. I read the explanation and asked questions about them, but I did not include them in my final code because the page displayed correctly without them on my computer.
-- I checked where each CSS rule was used, for example finding which rule sets the two-column projects layout.
-- I solved the greeting bug by checking my HTML and file setup.
-- I fixed the indentation and formatting so my code is consistent.
-- I tested the site at different screen sizes using browser DevTools.
+- I kept my original `.project-box img` styling instead of the `aspect-ratio` and `object-fit` version, because I preferred how mine looked.
+- I merged the new hover and transition lines into my existing `button`, `nav a` and `.project-box` rules instead of leaving duplicate rules.
+- I asked questions about the parts I did not understand, such as what a branch is, why `git push -u` is needed and what `.DS_Store` is.
+- I added my own project screenshots to `assets/images` and wrote the alt text.
+- I changed the animation distance in the fade-in effect and checked how it looked.
+- I tested each feature: searching for words that match and do not match, saving the theme and refreshing, submitting the form empty and with valid data, and viewing the page at laptop, tablet and phone sizes.
 
-I understand the code in my project and can explain how each part works. All AI help is documented in this report.
+All AI help is documented in this report.
