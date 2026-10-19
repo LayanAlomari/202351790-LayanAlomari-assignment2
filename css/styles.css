@@ -184,3 +184,14 @@ body.dark-mode textarea {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
+
+/* Project search box */
+#project-search {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+#no-results {
+  font-style: italic;
+}

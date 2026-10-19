@@ -24,3 +24,30 @@ themeButton.addEventListener("click", function () {
     themeButton.textContent = "Dark Mode";
   }
 });
+
+
+// Live search for projects
+const searchInput = document.getElementById("project-search");
+const projectBoxes = document.querySelectorAll(".project-box");
+const noResults = document.getElementById("no-results");
+
+searchInput.addEventListener("input", function () {
+  // Lowercase the text so the search ignores capital letters
+  const searchText = searchInput.value.toLowerCase().trim();
+  let matches = 0;
+
+  projectBoxes.forEach(function (box) {
+    // Check the search text against the title and description
+    const boxText = box.textContent.toLowerCase();
+
+    if (boxText.includes(searchText)) {
+      box.hidden = false;
+      matches++;
+    } else {
+      box.hidden = true;
+    }
+  });
+
+  // Show the message only when no project matches
+  noResults.hidden = matches > 0;
+});
