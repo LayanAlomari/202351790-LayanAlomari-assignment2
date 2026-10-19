@@ -98,6 +98,28 @@ form {
   border-radius: 8px;
 }
 
+/* Form messages */
+.error {
+  color: #b00020;
+  font-size: 0.9rem;
+  margin: 5px 0 0;
+}
+
+#form-success {
+  color: #1b6e2d;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+/* Lighter colors for dark mode so they stay readable */
+body.dark-mode .error {
+  color: #ff8a8a;
+}
+
+body.dark-mode #form-success {
+  color: #7ddc92;
+}
+
 label {
   margin-top: 15px;
   font-weight: bold;

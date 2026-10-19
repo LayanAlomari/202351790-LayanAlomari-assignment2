@@ -58,3 +58,54 @@ searchInput.addEventListener("input", function () {
   // Show the message only when no project matches
   noResults.hidden = matches > 0;
 });
+
+
+// Contact form validation
+const form = document.getElementById("contact-form");
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const messageInput = document.getElementById("message");
+const nameError = document.getElementById("name-error");
+const emailError = document.getElementById("email-error");
+const messageError = document.getElementById("message-error");
+const formSuccess = document.getElementById("form-success");
+
+form.addEventListener("submit", function (event) {
+  // Stop the page from reloading
+  event.preventDefault();
+
+  let isValid = true;
+  formSuccess.hidden = true;
+
+  // Name must not be empty
+  if (nameInput.value.trim() === "") {
+    nameError.textContent = "Please enter your name.";
+    isValid = false;
+  } else {
+    nameError.textContent = "";
+  }
+
+  // Email must look like name@example.com
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(emailInput.value.trim())) {
+    emailError.textContent = "Please enter a valid email, like name@example.com.";
+    isValid = false;
+  } else {
+    emailError.textContent = "";
+  }
+
+  // Message must have at least 10 characters
+  if (messageInput.value.trim().length < 10) {
+    messageError.textContent = "Please write a message of at least 10 characters.";
+    isValid = false;
+  } else {
+    messageError.textContent = "";
+  }
+
+  // If everything is valid, show the confirmation and clear the form
+  if (isValid) {
+    formSuccess.textContent = "Thanks, " + nameInput.value.trim() + "! Your message was submitted.";
+    formSuccess.hidden = false;
+    form.reset();
+  }
+});
