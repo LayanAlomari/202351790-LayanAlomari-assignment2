@@ -13,15 +13,22 @@ if (hour < 12) {
 // Dark/light mode button
 const themeButton = document.getElementById("theme-toggle");
 
+// When the page opens, load the saved theme
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark-mode");
+  themeButton.textContent = "Light Mode";
+}
+
 themeButton.addEventListener("click", function () {
-  // Add the class if it's missing, remove it if it's there
   document.body.classList.toggle("dark-mode");
 
-  // Change the button text to match
+  // Update the button text and save the choice
   if (document.body.classList.contains("dark-mode")) {
     themeButton.textContent = "Light Mode";
+    localStorage.setItem("theme", "dark");
   } else {
     themeButton.textContent = "Dark Mode";
+    localStorage.setItem("theme", "light");
   }
 });
 
